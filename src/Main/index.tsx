@@ -1,3 +1,4 @@
+import { Button } from '../components/Button/Button';
 import { Categories } from '../components/Categories/Categories';
 import { Header } from '../components/Header/Header';
 import { Menu } from '../components/Menu/Menu';
@@ -18,9 +19,11 @@ export const Main = () => {
         </MenuContainer>
 
       </Container>
-      <FooterContainer>
-        <Footer />
-      </FooterContainer>
+      <Footer>
+        <FooterContainer>
+          <Button label='Novo Pedido' onPress={() => alert('Feito!')} />
+        </FooterContainer>
+      </Footer>
     </>
   );
 };

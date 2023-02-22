@@ -1,7 +1,7 @@
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
-const isAndroid = Platform.OS === 'android';
+const isAndroid = Platform.OS === 'android' || Platform.OS === 'web';
 
 export const Category = styled.TouchableOpacity`
     align-items: center;
