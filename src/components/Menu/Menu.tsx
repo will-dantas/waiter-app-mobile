@@ -16,9 +16,11 @@ export const Menu = () => {
       renderItem={({ item: product }) => (
         <Product>
           <Image
-            source={require('../../assets/frango-catupiry.png')}
+            source={{
+                uri: `http://192.168.100.98:3001/uploads/${product.imagePath}`
+            }}
           />
-          
+
           <ProductDatails>
             <Text weight='600'>{product.name}</Text>
             <Text

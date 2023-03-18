@@ -14,6 +14,11 @@ export const TableModal = ({visible, onClose, onSave}: ITableModal) => {
     onClose();
   };
 
+  const handleCloseTable = () => {
+    setTable('');
+    onClose();
+  };
+
   return (
     <Modal
       visible={visible}
@@ -24,7 +29,7 @@ export const TableModal = ({visible, onClose, onSave}: ITableModal) => {
         <ModalBody>
           <ModalHeader>
             <Text weight='600'>Informe a mesa</Text>
-            <TouchableOpacity onPress={onClose}>
+            <TouchableOpacity onPress={handleCloseTable}>
               <Close color="#666"/>
             </TouchableOpacity>
           </ModalHeader>
