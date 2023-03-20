@@ -10,53 +10,65 @@ import { Actions, Image, Item, ProducContainer, ProductDatails, QuantityContaine
 export const Cart = ({ cartItens }: ICart) => {
   return (
     <>
-      <FlatList
-        data={cartItens}
-        keyExtractor={cartItem => cartItem.product._id}
-        showsVerticalScrollIndicator={false}
-        style={{marginBottom: 20, maxHeight: 150}}
-        renderItem={({ item: cartItem }) => (
-          <Item>
-            <ProducContainer>
-              <Image
-                source={require('../../assets/frango-catupiry.png')}
-              // source={{ uri: `http://localhost:3001/uploads/${cartItem.product.imagePath}`}}
-              />
-              <QuantityContainer>
-                <Text size={14} color="#666">
-                  {cartItem.quantity}x
-                </Text>
-              </QuantityContainer>
+      {cartItens.length > 0 &&
+        (
+          <FlatList
+            data={cartItens}
+            keyExtractor={cartItem => cartItem.product._id}
+            showsVerticalScrollIndicator={false}
+            style={{ marginBottom: 20, maxHeight: 150 }}
+            renderItem={({ item: cartItem }) => (
+              <Item>
+                <ProducContainer>
+                  <Image
+                    source={require('../../assets/frango-catupiry.png')}
+                  // source={{ uri: `http://localhost:3001/uploads/${cartItem.product.imagePath}`}}
+                  />
+                  <QuantityContainer>
+                    <Text size={14} color="#666">
+                      {cartItem.quantity}x
+                    </Text>
+                  </QuantityContainer>
 
-              <ProductDatails>
-                <Text size={14} weight='600'>
-                  {cartItem.product.name}
-                </Text>
-                <Text size={14} color='#666' style={{ marginTop: 4 }}>
-                  {FormatCurrency(cartItem.product.price)}
-                </Text>
-              </ProductDatails>
-            </ProducContainer>
-            <Actions>
-              <TouchableOpacity style={{ marginRight: 24 }}>
-                <PlusCircle />
-              </TouchableOpacity>
+                  <ProductDatails>
+                    <Text size={14} weight='600'>
+                      {cartItem.product.name}
+                    </Text>
+                    <Text size={14} color='#666' style={{ marginTop: 4 }}>
+                      {FormatCurrency(cartItem.product.price)}
+                    </Text>
+                  </ProductDatails>
+                </ProducContainer>
+                <Actions>
+                  <TouchableOpacity style={{ marginRight: 24 }}>
+                    <PlusCircle />
+                  </TouchableOpacity>
 
-              <TouchableOpacity>
-                <MinusCircle />
-              </TouchableOpacity>
-            </Actions>
-          </Item>
-        )}
-      />
-
+                  <TouchableOpacity>
+                    <MinusCircle />
+                  </TouchableOpacity>
+                </Actions>
+              </Item>
+            )}
+          />
+        )
+      }
       <Summary>
         <TotalContainer>
-          <Text color='#666'>Total</Text>
-          <Text size={20} weight="600">{FormatCurrency(120)}</Text>
+          {cartItens.length > 0 ? (
+            <>
+              <Text color='#666'>Total</Text>
+              <Text size={20} weight="600">{FormatCurrency(120)}</Text>
+            </>
+          ) :
+            (
+              <>
+                <Text color='#999'>Seu carrinho está vazio</Text>
+              </>
+            )}
         </TotalContainer>
 
-        <Button label='Confirmar pedido' onPress={() => alert('Pedido confirmado')}/>
+        <Button label='Confirmar pedido' onPress={() => alert('Pedido confirmado')} disabled={cartItens.length === 0}/>
       </Summary>
     </>
   );
