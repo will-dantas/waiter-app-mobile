@@ -1,3 +1,4 @@
 export interface IHeader {
-    selectedTable: string;
+  selectedTable: string;
+  onCancelOrder: () => void;
 }
