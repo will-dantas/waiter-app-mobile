@@ -24,11 +24,32 @@ export const Main = () => {
   };
 
   const handleAddToCart = (product: IProduct) => {
-    if(!selectedTable) {
+    if (!selectedTable) {
       setIsTableModalVisible(true);
     }
 
-    alert(product.name);
+    setCartItens((prevState) => {
+      const itemIndex = prevState.findIndex(
+        cartItem => cartItem.product._id === product._id
+      );
+
+      if (itemIndex < 0) {
+        return prevState.concat({
+          quantity: 1,
+          product
+        });
+      }
+
+      const newCartItens = [...prevState];
+      const item = newCartItens[itemIndex];
+
+      newCartItens[itemIndex] = {
+        ...item,
+        quantity: item.quantity + 1
+      };
+
+      return newCartItens;
+    });
   };
 
   // video 1:56:00
@@ -46,7 +67,7 @@ export const Main = () => {
         </CategoriesContainer>
 
         <MenuContainer>
-          <Menu onAddToCart={handleAddToCart}/>
+          <Menu onAddToCart={handleAddToCart} />
         </MenuContainer>
 
       </Container>
@@ -57,7 +78,10 @@ export const Main = () => {
           }
 
           {selectedTable &&
-            <Cart cartItens={cartItens} />}
+            <Cart
+              cartItens={cartItens}
+              onAdd={handleAddToCart}
+            />}
         </FooterContainer>
       </Footer>
 
