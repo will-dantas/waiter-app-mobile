@@ -1,9 +1,17 @@
 import { TouchableOpacity } from 'react-native';
+import { useCartItens } from '../../hooks/useCartItens';
 import { Text } from '../Text';
 import { IHeader } from './Header.interface';
 import { Container, ContentHeader, OrderHeader, TableHeader } from './Header.styles';
 
 export const Header = ({ selectedTable, onCancelOrder }: IHeader) => {
+  const { clearOrder } = useCartItens();
+
+  const cancelAndClearOrder = () => {
+    onCancelOrder();
+    clearOrder();
+  };
+
   return (
     <Container>
       {!selectedTable && (
@@ -23,7 +31,7 @@ export const Header = ({ selectedTable, onCancelOrder }: IHeader) => {
               <Text size={24} weight="600">
                 Pedidos
               </Text>
-              <TouchableOpacity onPress={onCancelOrder}>
+              <TouchableOpacity onPress={() => cancelAndClearOrder()}>
                 <Text color="#D73035" weight="600" size={14}>
                   Cancelar pedido
                 </Text>

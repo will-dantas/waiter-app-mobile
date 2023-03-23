@@ -1,13 +1,23 @@
 import { FlatList, TouchableOpacity } from 'react-native';
+import { useCartItens } from '../../hooks/useCartItens';
 import { FormatCurrency } from '../../utils/formatCurrency';
 import { Button } from '../Button/Button';
 import { MinusCircle } from '../Icons/MinusCircle';
 import { PlusCircle } from '../Icons/PlusCircle';
 import { Text } from '../Text';
-import { ICart } from './Cart.interface';
-import { Actions, Image, Item, ProducContainer, ProductDatails, QuantityContainer, Summary, TotalContainer } from './Cart.styles';
+import {
+  Actions,
+  Image,
+  Item,
+  ProducContainer,
+  ProductDatails,
+  QuantityContainer,
+  Summary,
+  TotalContainer
+} from './Cart.styles';
 
-export const Cart = ({ cartItens, onAdd }: ICart) => {
+export const Cart = () => {
+  const {cartItens, addToCart} = useCartItens();
   const total = cartItens.reduce((acc, cartItem) => {
     return acc + cartItem.quantity * cartItem.product.price;
   }, 0);
@@ -46,7 +56,7 @@ export const Cart = ({ cartItens, onAdd }: ICart) => {
                 <Actions>
                   <TouchableOpacity
                     style={{ marginRight: 24 }}
-                    onPress={() => onAdd(cartItem.product)}
+                    onPress={() => addToCart(cartItem.product)}
                   >
                     <PlusCircle />
                   </TouchableOpacity>
