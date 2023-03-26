@@ -19,7 +19,7 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
       openModal();
       setCartItens([]);
     }
-  
+
     setCartItens((prevState) => {
       const itemIndex = prevState.findIndex(
         cartItem => cartItem.product._id === product._id
@@ -44,8 +44,32 @@ export const CartProvider = ({ children }: ICartProviderProps) => {
     });
   };
 
+  const decreaseToCart = (product: IProduct) => {
+    setCartItens((prevState) => {
+      const itemIndex = prevState.findIndex(
+        cartItem => cartItem.product._id === product._id
+      );
+
+      const item = prevState[itemIndex];
+      const newCartItens = [...prevState];
+
+      if (item.quantity === 1) {
+        newCartItens.splice(itemIndex, 1);
+
+        return newCartItens;
+      }
+
+      newCartItens[itemIndex] = {
+        ...item,
+        quantity: item.quantity - 1
+      };
+
+      return newCartItens;
+    });
+  };
+
   return (
-    <CartContext.Provider value={{ cartItens, addToCart, clearOrder }}>
+    <CartContext.Provider value={{ cartItens, addToCart, decreaseToCart, clearOrder }}>
       {children}
     </CartContext.Provider>
   );

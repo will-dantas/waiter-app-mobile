@@ -1,9 +1,11 @@
+import { useState } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { useCartItens } from '../../hooks/useCartItens';
 import { FormatCurrency } from '../../utils/formatCurrency';
 import { Button } from '../Button/Button';
 import { MinusCircle } from '../Icons/MinusCircle';
 import { PlusCircle } from '../Icons/PlusCircle';
+import { OrderConfirmedModal } from '../OrderConfirmedModal/OrderConfirmedModal';
 import { Text } from '../Text';
 import {
   Actions,
@@ -17,13 +19,24 @@ import {
 } from './Cart.styles';
 
 export const Cart = () => {
-  const {cartItens, addToCart} = useCartItens();
+  const {cartItens, addToCart, decreaseToCart} = useCartItens();
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const total = cartItens.reduce((acc, cartItem) => {
     return acc + cartItem.quantity * cartItem.product.price;
   }, 0);
 
+  const handleConfirmedOrder = () => {
+    setIsModalVisible(true);
+
+  };
+
   return (
     <>
+      <OrderConfirmedModal
+        visible={isModalVisible}
+        onOk={() => setIsModalVisible}
+      />
       {cartItens.length > 0 &&
         (
           <FlatList
@@ -61,7 +74,7 @@ export const Cart = () => {
                     <PlusCircle />
                   </TouchableOpacity>
 
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => decreaseToCart(cartItem.product)}>
                     <MinusCircle />
                   </TouchableOpacity>
                 </Actions>
@@ -72,20 +85,27 @@ export const Cart = () => {
       }
       <Summary>
         <TotalContainer>
-          {cartItens.length > 0 ? (
-            <>
-              <Text color='#666'>Total</Text>
-              <Text size={20} weight="600">{FormatCurrency(total)}</Text>
-            </>
-          ) :
+          {cartItens.length > 0
+            ? (
+              <>
+                <Text color='#666'>Total</Text>
+                <Text size={20} weight="600">{FormatCurrency(total)}</Text>
+              </>
+            ) :
             (
               <>
                 <Text color='#999'>Seu carrinho está vazio</Text>
               </>
-            )}
+            )
+          }
         </TotalContainer>
 
-        <Button label='Confirmar pedido' onPress={() => alert('Pedido confirmado')} disabled={cartItens.length === 0} />
+        <Button
+          label='Confirmar pedido'
+          onPress={() => handleConfirmedOrder()}
+          disabled={cartItens.length === 0}
+          loading={isLoading}
+        />
       </Summary>
     </>
   );

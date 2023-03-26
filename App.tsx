@@ -4,6 +4,7 @@ import { CartProvider } from './src/contexts/cartContext/cartContext';
 import { ModalTableProvider } from './src/contexts/modalTableContext/modalTableContext';
 import 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [isFontsLoaded] = useFonts({
@@ -19,6 +20,7 @@ export default function App() {
   return (
     <ModalTableProvider>
       <CartProvider>
+        <StatusBar style='dark' />
         <Main />
       </CartProvider>
     </ModalTableProvider>
