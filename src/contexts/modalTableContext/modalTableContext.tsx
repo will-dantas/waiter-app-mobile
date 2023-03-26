@@ -24,7 +24,8 @@ export const ModalTableProvider = ({ children }: IModalTableProviderProps) => {
   };
 
   return (
-    <ModalTableContext.Provider value={{modalTable,
+    <ModalTableContext.Provider value={{
+      modalTable,
       openModal,
       closeModal,
       selectedTable,
