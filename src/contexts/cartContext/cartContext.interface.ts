@@ -3,7 +3,7 @@ import { ICartItem } from '../../types/Cart.interface';
 import { IProduct } from '../../types/Products.interface';
 
 export interface ICartProps {
-  cartItens: ICartItem[];
+  cartItems: ICartItem[];
   addToCart: (product: IProduct) => void;
   decreaseToCart: (product: IProduct) => void;
   clearOrder: () => void;

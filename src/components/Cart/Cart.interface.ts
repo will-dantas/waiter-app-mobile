@@ -1,7 +1,7 @@
-import { ICartItem } from '../../types/Cart.interface';
-import { IProduct } from '../../types/Products.interface';
+import { ICartItem } from "../../types/Cart.interface";
+import { IProduct } from "../../types/Products.interface";
 
 export interface ICart {
-  cartItens: ICartItem[];
+  cartItems: ICartItem[];
   onAdd: (product: IProduct) => void;
 }
