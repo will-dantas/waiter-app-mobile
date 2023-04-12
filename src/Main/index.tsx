@@ -21,6 +21,7 @@ import {
   FooterContainer,
   MenuContainer,
 } from './styles';
+import { CategoriesService } from '../services/CategoriesService/CategoriesService';
 
 export const Main = () => {
   const { addToCart } = useCartItems();
@@ -36,9 +37,8 @@ export const Main = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
 
-  const a = async () => await axios.get('http://localhost:3001/categories').then((response) => {
-    setCategories(response.data);
-  });
+  const a = async () => await new CategoriesService();
+  
   useEffect(() => {
     a();
   }, []);

@@ -35,8 +35,7 @@ export const ProductModal = ({ visible, onClose, product, onAddToCart }: IProduc
       onRequestClose={onClose}
     >
       <ImageModal
-        source={require('../../assets/frango-catupiry.png')}
-      // source={{ uri: `http://localhost:3001/uploads/${product.imagePath}`}}
+        source={{ uri: `http://localhost:3001/uploads/${product.imagePath}`}}
       >
         <CloseButton onPress={onClose}>
           <Close />

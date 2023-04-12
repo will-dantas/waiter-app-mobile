@@ -35,7 +35,7 @@ export const Menu = ({ onAddToCart, products }: IMenu) => {
         renderItem={({ item: product }) => (
           <ProductContainer onPress={() => handleOpenModal(product)}>
             <Image
-              source={require('../../assets/frango-catupiry.png')}
+             source={{ uri: `http://localhost:3001/uploads/${product.imagePath}`}}
             />
 
             <ProductDatails>
