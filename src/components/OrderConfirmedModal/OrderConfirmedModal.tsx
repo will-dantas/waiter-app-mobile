@@ -1,11 +1,11 @@
-import { StatusBar } from "expo-status-bar";
-import { Modal } from "react-native";
-import { useCartItems } from "../../hooks/useCartItems";
-import { useModalTable } from "../../hooks/useModalTable";
-import { CheckCircle } from "../Icons/CheckCircle";
-import { Text } from "../Text";
-import { IOrderConfirmedModal } from "./OrderConfirmedModal.interface";
-import { Container, OkButton } from "./OrderConfirmedModal.styles";
+import { StatusBar } from 'expo-status-bar';
+import { Modal } from 'react-native';
+import { useCartItems } from '../../hooks/useCartItems';
+import { useModalTable } from '../../hooks/useModalTable';
+import { CheckCircle } from '../Icons/CheckCircle';
+import { Text } from '../Text';
+import { IOrderConfirmedModal } from './OrderConfirmedModal.interface';
+import { Container, OkButton } from './OrderConfirmedModal.styles';
 
 export const OrderConfirmedModal = ({
   visible,

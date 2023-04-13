@@ -1,5 +1,5 @@
-import { AxiosResponse } from "axios";
-import { api } from "../api";
+import { AxiosResponse } from 'axios';
+import { api } from '../api';
 
 export class CategoriesService {
   async execute(): Promise<AxiosResponse> {

@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { Button } from '../components/Button/Button';
 import { Cart } from '../components/Cart/Cart';
@@ -22,6 +21,7 @@ import {
   MenuContainer,
 } from './styles';
 import { CategoriesService } from '../services/CategoriesService/CategoriesService';
+import { ProductsService } from '../services/ProductsService/ProductsService';
 
 export const Main = () => {
   const { addToCart } = useCartItems();
@@ -37,13 +37,20 @@ export const Main = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
 
-  const a = async () => await new CategoriesService();
+  const handleResquestCategoriesAndProducts = useCallback(() => {
+    Promise.all([
+      new CategoriesService().execute(),
+      new ProductsService().execute()
+    ]).then(([categoriesResponse, ProductsResponse]) => {
+      setCategories(categoriesResponse.data);
+      setProducts(ProductsResponse.data);
+      setIsLoading(false);
+    });
+  }, [categories, products]);
   
   useEffect(() => {
-    a();
+    handleResquestCategoriesAndProducts();
   }, []);
-
-  console.log(categories);
 
   return (
     <>

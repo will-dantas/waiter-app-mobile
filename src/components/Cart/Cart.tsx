@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { FlatList, TouchableOpacity } from "react-native";
-import { useCartItems } from "../../hooks/useCartItems";
-import { FormatCurrency } from "../../utils/formatCurrency";
-import { Button } from "../Button/Button";
-import { MinusCircle } from "../Icons/MinusCircle";
-import { PlusCircle } from "../Icons/PlusCircle";
-import { OrderConfirmedModal } from "../OrderConfirmedModal/OrderConfirmedModal";
-import { Text } from "../Text";
+import { useState } from 'react';
+import { FlatList, TouchableOpacity } from 'react-native';
+import { useCartItems } from '../../hooks/useCartItems';
+import { FormatCurrency } from '../../utils/formatCurrency';
+import { Button } from '../Button/Button';
+import { MinusCircle } from '../Icons/MinusCircle';
+import { PlusCircle } from '../Icons/PlusCircle';
+import { OrderConfirmedModal } from '../OrderConfirmedModal/OrderConfirmedModal';
+import { Text } from '../Text';
 import {
   Actions,
   Image,
@@ -16,7 +16,7 @@ import {
   QuantityContainer,
   Summary,
   TotalContainer,
-} from "./Cart.styles";
+} from './Cart.styles';
 
 export const Cart = () => {
   const { cartItems, addToCart, decreaseToCart } = useCartItems();
@@ -46,8 +46,7 @@ export const Cart = () => {
             <Item>
               <ProducContainer>
                 <Image
-                  source={require("../../assets/frango-catupiry.png")}
-                  // source={{ uri: `http://localhost:3001/uploads/${cartItem.product.imagePath}`}}
+                  source={{ uri: `http://localhost:3001/uploads/${cartItem.product.imagePath}`}}
                 />
                 <QuantityContainer>
                   <Text size={14} color="#666">
