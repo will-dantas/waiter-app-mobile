@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { ICartItem } from '../../types/Cart.interface';
+import { ICartItem } from '../../types/CartItem.interface';
 import { IProduct } from '../../types/Products.interface';
 
 export interface ICartProps {

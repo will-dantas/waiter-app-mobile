@@ -17,17 +17,43 @@ import {
   Summary,
   TotalContainer,
 } from './Cart.styles';
+import { useModalTable } from '../../hooks/useModalTable';
+import { IOrderPayload } from '../../types/OrderPayload';
+import { CreateOrderService } from '../../services/CreateOrderService/CreateOrderService';
+import { AxiosError } from 'axios';
 
 export const Cart = () => {
   const { cartItems, addToCart, decreaseToCart } = useCartItems();
+  const { selectedTable } = useModalTable();
   const [isLoading, setIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const total = cartItems.reduce((acc, cartItem) => {
     return acc + cartItem.quantity * cartItem.product.price;
   }, 0);
 
-  const handleConfirmedOrder = () => {
-    setIsModalVisible(true);
+  const handleConfirmedOrder = async () => {
+    const productOrders = cartItems.map((cartItem) => ({
+      product: cartItem.product._id,
+      quantity: cartItem.quantity,
+    }));
+
+    const orderPayload: IOrderPayload = {
+      table: selectedTable,
+      products: productOrders
+    };
+
+    setIsLoading(true);
+
+    new CreateOrderService().execute(orderPayload).then(() => {
+      setIsModalVisible(false);
+      setIsModalVisible(true);
+    }).catch((error: AxiosError) => {
+      if (error.response?.status === 500) {
+        alert('Erro no servidor, tente mais tarde!');
+      }
+
+      setIsLoading(false);
+    });
   };
 
   return (
@@ -46,7 +72,7 @@ export const Cart = () => {
             <Item>
               <ProducContainer>
                 <Image
-                  source={{ uri: `http://localhost:3001/uploads/${cartItem.product.imagePath}`}}
+                  source={{ uri: `http://localhost:3001/uploads/${cartItem.product.imagePath}` }}
                 />
                 <QuantityContainer>
                   <Text size={14} color="#666">

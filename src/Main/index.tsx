@@ -10,7 +10,7 @@ import { TableModal } from '../components/TableModal/TableModal';
 import { Text } from '../components/Text';
 import { useCartItems } from '../hooks/useCartItems';
 import { useModalTable } from '../hooks/useModalTable';
-import { ICategory } from '../types/Category';
+import { ICategory } from '../types/Category.interface.';
 import { IProduct } from '../types/Products.interface';
 import {
   CategoriesContainer,
@@ -22,6 +22,8 @@ import {
 } from './styles';
 import { CategoriesService } from '../services/CategoriesService/CategoriesService';
 import { ProductsService } from '../services/ProductsService/ProductsService';
+import { AxiosError } from 'axios';
+import { ProductsByCategory } from '../services/ProductsByCategory/ProductsByCategory';
 
 export const Main = () => {
   const { addToCart } = useCartItems();
@@ -33,7 +35,7 @@ export const Main = () => {
     cancelOrder,
     saveTable,
   } = useModalTable();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [categories, setCategories] = useState<ICategory[]>([]);
 
@@ -45,9 +47,25 @@ export const Main = () => {
       setCategories(categoriesResponse.data);
       setProducts(ProductsResponse.data);
       setIsLoading(false);
+    }).catch((error: AxiosError) => {
+      if (error.response?.status === 500) {
+        alert('Erro no servidor, tente mais tarde!');
+      }
+
+      setIsLoading(false);
     });
   }, [categories, products]);
-  
+
+  const handleSelectCategory = async (categoryId: string) => {
+    console.log('handleSelectCategory', categoryId);
+    const request = !categoryId
+      ? new ProductsService().execute()
+      : new ProductsByCategory().execute(categoryId);
+      // classes 55 min
+    const { data } = await request;
+    setProducts(data);
+  };
+
   useEffect(() => {
     handleResquestCategoriesAndProducts();
   }, []);
@@ -66,7 +84,10 @@ export const Main = () => {
         {!isLoading && (
           <>
             <CategoriesContainer>
-              <Categories categories={categories} />
+              <Categories
+                categories={categories}
+                onSelectCategory={handleSelectCategory}
+              />
             </CategoriesContainer>
 
             {products.length > 0 ? (

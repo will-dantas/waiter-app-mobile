@@ -29,7 +29,6 @@ export const Menu = ({ onAddToCart, products }: IMenu) => {
       <FlatList
         data={products}
         keyExtractor={products => products._id}
-        style={{ marginTop: 32 }}
         contentContainerStyle={{ paddingHorizontal: 24 }}
         ItemSeparatorComponent={Separator}
         renderItem={({ item: product }) => (

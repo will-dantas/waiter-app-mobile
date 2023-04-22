@@ -1,8 +1,7 @@
-import { createContext, useState } from "react";
-import { useModalTable } from "../../hooks/useModalTable";
-import { ICartItem } from "../../types/Cart.interface";
-import { IProduct } from "../../types/Products.interface";
-import { ICartProps, ICartProviderProps } from "./cartContext.interface";
+import { createContext, useState } from 'react';
+import { useModalTable } from '../../hooks/useModalTable';
+import { IProduct } from '../../types/Products.interface';
+import { ICartProps, ICartProviderProps } from './cartContext.interface';
 
 export const CartContext = createContext<ICartProps>({} as ICartProps);
 
