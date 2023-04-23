@@ -1,13 +1,13 @@
-import { TouchableOpacity } from "react-native";
-import { useCartItems } from "../../hooks/useCartItems";
-import { Text } from "../Text";
-import { IHeader } from "./Header.interface";
+import { TouchableOpacity } from 'react-native';
+import { useCartItems } from '../../hooks/useCartItems';
+import { Text } from '../Text';
+import { IHeader } from './Header.interface';
 import {
   Container,
   ContentHeader,
   OrderHeader,
   TableHeader,
-} from "./Header.styles";
+} from './Header.styles';
 
 export const Header = ({ selectedTable, onCancelOrder }: IHeader) => {
   const { clearOrder } = useCartItems();

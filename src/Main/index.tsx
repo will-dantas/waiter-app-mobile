@@ -61,7 +61,6 @@ export const Main = () => {
     const request = !categoryId
       ? new ProductsService().execute()
       : new ProductsByCategory().execute(categoryId);
-      // classes 55 min
     const { data } = await request;
     setProducts(data);
   };

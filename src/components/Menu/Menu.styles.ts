@@ -1,31 +1,31 @@
 import styled from 'styled-components/native';
 
 export const ProductContainer = styled.TouchableOpacity`
-    flex-direction: row;
-    align-items: center;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const Image = styled.Image`
-    width: 120px;
-    height: 96px;
-    border-radius: 8px;
-    object-fit: cover;
+  width: 120px;
+  height: 96px;
+  border-radius: 8px;
+  object-fit: cover;
 `;
 
 export const ProductDatails = styled.View`
-    margin-left: 16px;
-    flex: 1;
+  margin-left: 16px;
+  flex: 1;
 `;
 
 export const Separator = styled.View`
-    width: 100%;
-    padding: 1px;
-    background: rgba(204, 204, 204, 0.3);
-    margin: 24px 0;
+  width: 100%;
+  padding: 1px;
+  background: rgba(204, 204, 204, 0.3);
+  margin: 24px 0;
 `;
 
 export const AddToCartButton = styled.TouchableOpacity`
-    position: absolute;
-    bottom: 0;
-    right: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 `;
