@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="NLW Copa" src=".github/capa.svg" width="500" />
+  <img alt="waiter app capa" src=".github/capa.svg" width="500" />
 </p>
 
 ## 💻 Projeto
@@ -44,7 +44,7 @@ yarn install
 ```
 yarn start
 ```
-Pronto, se tudo estiver correto você pode vizualizar o app escaneando o QRcode que o expo gera pelo seu aparelho celular, ou apertar ** (abrirá no browser), i (abriará no emulador IOs), a (abrirá no emulador Android).**
+Pronto, se tudo estiver correto você pode vizualizar o app escaneando o QRcode que o expo gera pelo seu aparelho celular, ou apertar **w(abrirá no browser), i (abriará no emulador IOs), a (abrirá no emulador Android).**
 
 ---
 
